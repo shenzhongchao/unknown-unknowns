@@ -1,8 +1,12 @@
 # unknown-unknowns
 
-A small collection of agent skills for one problem: **helping AI notice what the user may not realize they are missing**.
+**Find the edges of your current model — then design probes that make hidden unknowns easier to reveal.**
 
-The goal is not to make an agent argumentative. It is to make it epistemically useful: challenge hidden assumptions, inspect the problem frame, look for missing evidence, use outside views, and surface plausible blind spots before execution.
+This repository contains agent skills for epistemic boundary work: challenging hidden assumptions, escaping problem frames, separating evidence from belief, and knowing when more reasoning should stop and contact with reality should begin.
+
+> A literal unknown unknown cannot be enumerated in advance. If it can already be named, it is no longer fully unknown. These skills do not promise completeness; they aim to expose model boundaries and create conditions where surprises become visible sooner.
+
+See [docs/epistemic-model.md](docs/epistemic-model.md) for the full model.
 
 ## Quick start
 
@@ -20,10 +24,16 @@ Install only for Codex:
 npx --yes github:shenzhongchao/unknown-unknowns install --agent codex
 ```
 
-Install only one skill:
+Install only the main skill:
 
 ```bash
 npx --yes github:shenzhongchao/unknown-unknowns install unknown-unknowns --agent codex
+```
+
+Install the reality-probe skill by itself:
+
+```bash
+npx --yes github:shenzhongchao/unknown-unknowns install probe-design --agent codex
 ```
 
 Install into the current repository instead of your user profile:
@@ -51,28 +61,67 @@ The installer copies the canonical skill folders from this repository into the a
 
 | Skill | Purpose |
 | --- | --- |
-| `unknown-unknowns` | General cognitive-boundary scan. Best default when you suspect the framing itself may be incomplete. |
-| `assumption-audit` | Turns explicit and implicit assumptions into a falsifiable assumption ledger. |
-| `problem-reframe` | Challenges whether the stated problem is the right problem, boundary, objective, or unit of analysis. |
-| `premortem` | Assumes the plan failed and works backward to expose neglected failure modes and leading indicators. |
-| `outside-view` | Uses reference classes, analogies, and base-rate thinking without inventing statistics. |
-| `evidence-gap` | Maps important claims to evidence, disconfirming evidence, and the cheapest useful next information. |
+| `unknown-unknowns` | Main orchestrator: find current-model boundaries, escape frame-lock, classify uncertainty, and design surprise-seeking probes. |
+| `probe-design` | Turn unresolved uncertainty into low-cost, discriminating contact with reality; define surprise conditions and decision rules. |
+| `assumption-audit` | Turn explicit and implicit assumptions into a falsifiable assumption ledger. |
+| `problem-reframe` | Challenge whether the stated problem is the right problem, boundary, objective, or unit of analysis. |
+| `premortem` | Assume the plan failed and work backward to expose neglected failure modes and leading indicators. |
+| `outside-view` | Use reference classes, analogies, and base-rate thinking without inventing statistics. |
+| `evidence-gap` | Map important claims to evidence, disconfirming evidence, and the cheapest useful next information. |
+
+## The core loop
+
+```text
+Current model
+    ↓
+Boundary scan
+    ↓
+Alternative frames
+    ↓
+Reasoning / evidence / reality boundary
+    ↓
+Discriminating probes
+    ↓
+Observe surprises and anomalies
+    ↓
+Reframe / update
+```
+
+The crucial rule is: **do not keep thinking when only new observations can resolve the uncertainty.**
+
+A good probe is not merely a validation task. It states competing explanations, creates a small contact with reality, defines what would surprise the current model, and changes the next action depending on the result.
 
 ## Use
 
-Codex can explicitly invoke installed skills with `$skill-name`. For example:
+Codex can explicitly invoke installed skills with `$skill-name`:
 
 ```text
 $unknown-unknowns Audit this product idea before we start building.
 ```
 
-Claude Code exposes skills as slash commands. For example:
+```text
+$probe-design We think matching quality causes low conversion. Design the cheapest probes that could prove us wrong.
+```
+
+Claude Code exposes skills as slash commands:
 
 ```text
 /unknown-unknowns Audit this product idea before we start building.
 ```
 
 You can also ask the agent normally; good skill descriptions allow compatible hosts to select skills implicitly.
+
+## What the project targets
+
+It helps to distinguish three levels:
+
+1. **Known unknowns** — gaps the user already knows exist.
+2. **Out-of-frame unknowns** — variables absent from the current problem representation but nameable from another frame, stakeholder, domain, or reference class.
+3. **Genuine unknown unknowns** — mechanisms not represented by the user, skill author, or model's accessible frame.
+
+The reasoning skills mainly target level 2.
+
+Level 3 cannot be guaranteed by prompting. The project instead tries to increase exposure to it through anomalies, experiments, deployment, independent replication, missing stakeholders, edge cases, and other reality-facing probes.
 
 ## CLI
 
@@ -104,36 +153,25 @@ npx --yes github:shenzhongchao/unknown-unknowns doctor
 
 ## Design principles
 
-These skills deliberately distinguish **candidate unknown unknowns** from facts. An agent cannot logically enumerate truly unknown unknowns; it can only use other frames, actors, reference classes, anomalies, counterfactuals, and evidence gaps to expose regions that deserve investigation.
+The collection is an **Explorer / Critic / Probe layer before an Executor**.
 
-They also avoid performative agreement. The agent should not say an idea is great or bad merely to match the user's tone. It should state what is observed, what is inferred, what is uncertain, and what evidence would change the decision.
-
-The collection is designed as an **Explorer / Critic layer before an Executor**. It should help answer questions such as:
+It should help answer:
 
 - Are we solving the wrong problem?
-- Which assumptions are carrying most of the plan?
-- Who or what is missing from the frame?
-- What would have to be true for this plan to fail?
-- What does the outside view say?
-- Which missing fact would most change the next action?
+- Which assumptions carry most of the plan?
+- What is outside the current system boundary?
+- Which uncertainty can still be resolved by reasoning?
+- Which uncertainty now requires external evidence or behavior?
+- What observation would make the current model fail visibly?
+- What anomaly would force us to reframe rather than patch locally?
 
-## Development
+The skills avoid both performative agreement and reflexive contrarianism. The goal is not to make the agent negative; it is to make beliefs easier to falsify.
 
-Requires Node.js 18 or newer.
-
-```bash
-npm test
-node ./bin/unknown-unknowns.js list
-node ./bin/unknown-unknowns.js install --scope project --dry-run
-```
-
-## License
-
-MIT
+They also explicitly guard against **checklist closure**: scanning familiar categories is not evidence that the unknown space has been exhausted.
 
 ## Evaluation
 
-This repository includes a paired benchmark for checking whether the main skill actually exposes blind spots beyond a strong baseline assistant.
+This repository includes a paired benchmark for checking whether the main skill exposes out-of-frame blind spots beyond a strong baseline assistant and whether it proposes decision-relevant probes rather than generic research.
 
 Validate the benchmark structure:
 
@@ -148,9 +186,23 @@ export OPENAI_API_KEY=...
 npm run eval:run -- --model gpt-5.6-sol --judge-model gpt-5.6-sol
 ```
 
-The generator does **not** see the benchmark's expected blind spots. A judge model scores hidden-target recall, frame expansion, assumption quality, decision relevance, falsifiability, calibration, and restraint.
+The generator does **not** see the benchmark's expected hidden targets. A judge model scores target recall, frame expansion, assumption quality, decision relevance, falsifiability, calibration, restraint, and probe quality.
 
-See `evals/README.md`, `evals/RUBRIC.md`, and the committed pilot report under `evals/results/`.
+A benchmark with prewritten targets tests recovery of **hidden knowns**, not literal unknown unknowns. The longer-term research question is whether this workflow causes real projects to encounter important surprises earlier and more cheaply.
 
-The first non-independent pilot found a ceiling problem in several sanity cases, so its scores are not presented as a performance claim. The most discriminative cases were those where the user's proposed solution itself needed to be questioned.
+See `evals/README.md`, `evals/RUBRIC.md`, and reports under `evals/results/`.
 
+## Development
+
+Requires Node.js 18 or newer.
+
+```bash
+npm test
+npm run eval:validate
+node ./bin/unknown-unknowns.js list
+node ./bin/unknown-unknowns.js install --scope project --dry-run
+```
+
+## License
+
+MIT
