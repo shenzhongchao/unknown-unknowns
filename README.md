@@ -130,3 +130,27 @@ node ./bin/unknown-unknowns.js install --scope project --dry-run
 ## License
 
 MIT
+
+## Evaluation
+
+This repository includes a paired benchmark for checking whether the main skill actually exposes blind spots beyond a strong baseline assistant.
+
+Validate the benchmark structure:
+
+```bash
+npm run eval:validate
+```
+
+Run a reproducible baseline-vs-skill comparison with the OpenAI Responses API:
+
+```bash
+export OPENAI_API_KEY=...
+npm run eval:run -- --model gpt-5.6-sol --judge-model gpt-5.6-sol
+```
+
+The generator does **not** see the benchmark's expected blind spots. A judge model scores hidden-target recall, frame expansion, assumption quality, decision relevance, falsifiability, calibration, and restraint.
+
+See `evals/README.md`, `evals/RUBRIC.md`, and the committed pilot report under `evals/results/`.
+
+The first non-independent pilot found a ceiling problem in several sanity cases, so its scores are not presented as a performance claim. The most discriminative cases were those where the user's proposed solution itself needed to be questioned.
+

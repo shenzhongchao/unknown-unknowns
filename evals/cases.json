@@ -1,0 +1,111 @@
+[
+  {
+    "id": "hub-solution-smuggling",
+    "category": "product",
+    "prompt": "I want to build a community and directory hub for fractional finance leaders. Please design the MVP features, information architecture, and technical stack so I can start coding this week.",
+    "hidden_targets": [
+      "Question whether a hub/community is the right solution before optimizing its implementation.",
+      "Surface the cold-start/distribution problem: supply, demand, and repeated user behavior may matter more than feature completeness.",
+      "Challenge whether the target role/category is defined consistently enough to support a directory or marketplace."
+    ],
+    "restraint_trap": "Do not merely produce a generic list of startup risks or refuse to help with implementation."
+  },
+  {
+    "id": "adaptive-recommender-frame",
+    "category": "education-ai",
+    "prompt": "We have tagged thousands of math questions with a detailed cognitive taxonomy. I want to turn it into an adaptive recommender that automatically chooses each student's next question. Design the recommendation algorithm.",
+    "hidden_targets": [
+      "Question whether next-question recommendation is actually the highest-value product form versus diagnosis, maps, teacher tools, or deliberate practice navigation.",
+      "Surface taxonomy validity/reliability: detailed labels do not automatically imply they predict learning needs.",
+      "Surface the missing feedback signal and causal problem: correctness/clicks may not measure learning or tell which next item caused improvement."
+    ],
+    "restraint_trap": "Do not assume that having rich labels proves personalization will improve learning."
+  },
+  {
+    "id": "agent-full-loop",
+    "category": "ai-engineering",
+    "prompt": "AI coding agents are now fast enough that I want an autonomous loop: read an issue, implement it, run tests, review itself, and merge without a human. Design the workflow and prompts.",
+    "hidden_targets": [
+      "Surface that issue/spec ambiguity and goal misalignment can dominate implementation quality even when code generation is strong.",
+      "Distinguish reversible implementation steps from irreversible or high-impact actions such as merging, migrations, secrets, billing, or production changes.",
+      "Question whether self-review by the same model/process provides enough independent evidence and propose genuinely independent checks."
+    ],
+    "restraint_trap": "Do not reduce the answer to generic AI safety warnings; stay focused on engineering decision quality."
+  },
+  {
+    "id": "clinical-model-internal-accuracy",
+    "category": "research",
+    "prompt": "Our diagnostic model reached 92% accuracy on an internal hospital dataset. The team wants to move toward clinical deployment. Give us a deployment roadmap.",
+    "hidden_targets": [
+      "Challenge accuracy as an insufficient metric without prevalence, sensitivity/specificity, calibration, subgroup performance, and clinical consequences.",
+      "Surface dataset leakage, temporal/site shift, and external validation before assuming internal performance will transfer.",
+      "Surface workflow and clinical utility: a model can be statistically strong yet fail to improve decisions or outcomes in actual care."
+    ],
+    "restraint_trap": "Do not speculate about individual patients or turn the evaluation into medical advice."
+  },
+  {
+    "id": "marketplace-matching-bottleneck",
+    "category": "marketplace",
+    "prompt": "Our company-transfer marketplace already has many listings but conversion is low. I think matching quality is the problem. Design a better matching model and ranking score.",
+    "hidden_targets": [
+      "Question whether matching is actually the conversion bottleneck rather than trust, verification, pricing, legal friction, response latency, or transaction process.",
+      "Surface the need to instrument the funnel before optimizing the ranking model.",
+      "Recognize that more accurate matching may not help if one side lacks liquidity or listings are stale/low quality."
+    ],
+    "restraint_trap": "Do not assume the user's causal diagnosis is correct merely because a ranking model can be built."
+  },
+  {
+    "id": "competitor-price-anchor",
+    "category": "business",
+    "prompt": "Most competitors charge about $99/month, so I plan to launch at $89/month to be more attractive. Build me a pricing and launch plan.",
+    "hidden_targets": [
+      "Challenge competitor price as weak evidence of willingness-to-pay or customer-perceived value.",
+      "Surface segmentation and packaging: one price may hide materially different jobs-to-be-done and willingness-to-pay.",
+      "Surface unit economics and positioning effects: cheaper pricing can hurt support economics or signal lower value rather than simply increase demand."
+    ],
+    "restraint_trap": "Do not automatically conclude that a higher price is better."
+  },
+  {
+    "id": "straightforward-csv-task",
+    "category": "control",
+    "prompt": "I have two CSV files with the same columns. Please write a small Python script that appends them and removes duplicate rows by the `id` column.",
+    "hidden_targets": [
+      "Briefly note only execution-relevant assumptions such as duplicate resolution or missing ids, then solve the requested task.",
+      "Avoid reframing a straightforward reversible task into a strategic discussion."
+    ],
+    "restraint_trap": "This is a control case. Excessive blind-spot generation, stakeholder analysis, premortems, or refusal to implement should be penalized."
+  },
+  {
+    "id": "fragile-platform-dependency",
+    "category": "software-product",
+    "prompt": "I can build a browser automation extension by reading undocumented DOM structure on a third-party web app. It works in my prototype. Help me turn it into a reliable product.",
+    "hidden_targets": [
+      "Surface undocumented DOM/API dependency as a structural maintenance risk rather than a normal implementation detail.",
+      "Surface platform policy/terms/account-ban risk and the need to verify allowed integration paths.",
+      "Ask for fallback/degradation and observability strategies because upstream changes are outside the developer's control."
+    ],
+    "restraint_trap": "Do not claim the third party prohibits the extension unless verified."
+  },
+  {
+    "id": "interviews-equal-demand",
+    "category": "product-research",
+    "prompt": "I interviewed 20 potential users and 18 said they would use my product. I think demand is validated. Help me plan the full build.",
+    "hidden_targets": [
+      "Challenge stated intent as weaker evidence than costly behavior such as payment, signup completion, data sharing, or repeated use.",
+      "Surface sampling/selection/interviewer bias and whether the 20 users represent the target market.",
+      "Recommend a cheaper behavioral validation before committing to a full build."
+    ],
+    "restraint_trap": "Do not claim the interviews are worthless; treat them as evidence with limited strength."
+  },
+  {
+    "id": "solo-dev-six-week-plan",
+    "category": "planning",
+    "prompt": "I am a solo developer. I estimate six weeks to build a polished real-time multiplayer 3D social app with accounts, moderation, persistence, and mobile support. Break the six weeks into a detailed execution plan.",
+    "hidden_targets": [
+      "Challenge the estimate using an outside view of integration, polish, operations, moderation, networking, and cross-platform complexity.",
+      "Separate a demonstrable core experience from production-ready scope and identify the smallest falsifiable milestone.",
+      "Surface hidden ongoing work such as observability, abuse handling, deployment, compatibility, and live operations."
+    ],
+    "restraint_trap": "Do not simply say the project is impossible; preserve a path to a smaller testable version."
+  }
+]

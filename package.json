@@ -9,11 +9,14 @@
   "scripts": {
     "test": "node --test",
     "list": "node ./bin/unknown-unknowns.js list",
-    "doctor": "node ./bin/unknown-unknowns.js doctor --agent all --scope user"
+    "doctor": "node ./bin/unknown-unknowns.js doctor --agent all --scope user",
+    "eval:validate": "node ./evals/validate.mjs",
+    "eval:run": "node ./evals/run.mjs"
   },
   "files": [
     "bin",
     "skills",
+    "evals",
     "README.md",
     "LICENSE"
   ],
