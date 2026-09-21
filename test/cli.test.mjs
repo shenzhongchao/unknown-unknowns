@@ -22,6 +22,7 @@ test('list exposes bundled skills', () => {
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /unknown-unknowns/);
   assert.match(result.stdout, /assumption-audit/);
+  assert.match(result.stdout, /probe-design/);
 });
 
 test('install, overwrite guard, force, and uninstall work for Codex user scope', () => {
@@ -52,10 +53,10 @@ test('install, overwrite guard, force, and uninstall work for Codex user scope',
 test('project scope installs into both supported agent directories', () => {
   const project = fs.mkdtempSync(path.join(os.tmpdir(), 'unknown-unknowns-project-'));
   try {
-    const result = run(['install', 'premortem', '--agent', 'all', '--scope', 'project'], { cwd: project });
+    const result = run(['install', 'probe-design', '--agent', 'all', '--scope', 'project'], { cwd: project });
     assert.equal(result.status, 0, result.stderr);
-    assert.equal(fs.existsSync(path.join(project, '.agents', 'skills', 'premortem', 'SKILL.md')), true);
-    assert.equal(fs.existsSync(path.join(project, '.claude', 'skills', 'premortem', 'SKILL.md')), true);
+    assert.equal(fs.existsSync(path.join(project, '.agents', 'skills', 'probe-design', 'SKILL.md')), true);
+    assert.equal(fs.existsSync(path.join(project, '.claude', 'skills', 'probe-design', 'SKILL.md')), true);
   } finally {
     fs.rmSync(project, { recursive: true, force: true });
   }

@@ -1,91 +1,212 @@
 ---
 name: unknown-unknowns
-description: Discover plausible blind spots, hidden assumptions, missing actors, framing errors, and decision-relevant unknowns before committing to a plan. Use when a user asks what they may be missing, wants a second-order critique, is about to invest substantial effort, or may have framed the problem too narrowly.
+description: Find the edges of a user's current model, surface out-of-frame assumptions and variables, and design reality-facing probes that make hidden unknowns easier to reveal. Use when a decision may be trapped inside its own framing, when more reasoning is unlikely to resolve key uncertainty, or before costly commitment.
 ---
 
 # Unknown Unknowns
 
-Your objective is epistemic discovery, not validation and not contrarian performance.
+Your objective is not to enumerate unknowable unknowns. Your objective is to find the edges of the current model and create conditions in which hidden unknowns are more likely to become visible.
 
-Do not begin by praising the idea. Do not reject it merely to sound critical. Treat the user's frame as a hypothesis.
+Do not begin by praising the idea. Do not reject it merely to sound critical. Treat the user's frame as a provisional model.
 
-## Core rule
+## Literal limitation
 
-A true unknown unknown cannot be enumerated directly. Once named, it is no longer unknown. Therefore, label outputs as candidate blind spots or regions worth investigating, never as a complete list of what the user does not know.
+A true unknown unknown cannot be listed in advance. Once it can be named, it has already become a known unknown or an out-of-frame hypothesis.
 
-Separate:
-- observed or supplied facts,
-- reasonable inferences,
-- unsupported assumptions,
-- speculative candidate blind spots.
+Therefore never imply:
+- that this scan is complete,
+- that all important risks have been found,
+- that a checklist can exhaust the unknown,
+- that more reasoning alone can reveal everything that matters.
 
-When important facts depend on external reality and tools are available, verify them. Never invent evidence, base rates, regulations, user behavior, or market facts.
+The skill has two jobs:
+
+1. **Boundary discovery** — expose assumptions, omitted variables, alternative frames, and places where the current model is brittle.
+2. **Probe design** — identify what cannot be resolved by reasoning alone and design low-cost contact with reality that can produce surprising evidence.
+
+## Epistemic layers
+
+Keep these distinct:
+
+- **Observed facts** — supplied or directly verified.
+- **Inferences** — conclusions supported by those facts.
+- **Assumptions** — claims the plan depends on but has not established.
+- **Candidate blind spots** — plausible variables or frames outside the current model.
+- **Residual unknown space** — what remains inaccessible without new observations, actors, environments, or experiments.
+
+Do not promote a candidate blind spot to fact merely because it sounds sophisticated.
+
+## Restraint gate
+
+Before doing a full scan, ask whether the task is simple, reversible, and locally well specified.
+
+If yes:
+- note only execution-relevant assumptions,
+- solve the task,
+- avoid unnecessary stakeholder maps, premortems, or reframing.
+
+Use the full workflow when the decision is costly, ambiguous, strategic, novel, hard to reverse, or strongly dependent on unverified causal claims.
 
 ## Workflow
 
-1. State the current frame in one or two sentences.
-   - What is the user trying to achieve?
-   - What solution, boundary, metric, or causal story is already embedded in the question?
+### 1. State the current model
 
-2. Find frame-lock.
-   Look for assumptions hidden in wording such as must, should, obviously, users will, the problem is, the solution is, or any request that jumps directly to implementation.
+In one or two sentences identify:
+- intended outcome,
+- proposed solution or action,
+- causal story,
+- system boundary,
+- success signal.
 
-3. Scan from outside the frame using these lenses:
-   - objective versus proxy,
-   - problem versus proposed solution,
-   - missing stakeholders or adversaries,
-   - incentives and strategic behavior,
-   - reference classes and analogous failures,
-   - measurement and observability,
-   - causal direction and confounders,
-   - operational and coordination constraints,
-   - timing and path dependence,
-   - second-order effects,
-   - external constraints such as law, standards, platform rules, or dependencies,
-   - the null option: what if nothing is built or changed?
+### 2. Detect frame-lock
 
-4. Generate a small set of candidate blind spots.
-   For each, include:
-   - what may be missing,
-   - why it is easy to miss from the current frame,
-   - what signal would make it more likely,
-   - the cheapest useful way to investigate it.
+Look for solution smuggling or hidden certainty:
+- "the problem is..."
+- "users want..."
+- "we just need..."
+- "the bottleneck is..."
+- "the model should..."
+- direct jumps from a symptom to implementation.
 
-5. Reframe the problem.
-   Produce two to four alternative formulations that, if true, would materially change the plan. At least one should question the proposed solution itself, not merely its implementation.
+Ask what must already be true for the question itself to be the right question.
 
-6. Identify decision pivots.
-   Name the missing facts or tests that could change the next action. Prefer information with high decision value over general research.
+### 3. Expand outside the frame
 
-7. End with residual uncertainty.
-   Explicitly state what this scan still cannot reveal without contact with reality, additional expertise, experiments, or new data.
+Use only lenses that could materially change the decision:
+
+- outcome versus proxy,
+- problem versus proposed solution,
+- missing stakeholders or adversaries,
+- incentives and strategic behavior,
+- reference classes,
+- causal reversal and confounders,
+- measurement and observability,
+- operational constraints,
+- time and path dependence,
+- second-order effects,
+- external dependencies, standards, policy, or platform constraints,
+- the null option,
+- alternative units of analysis,
+- evidence from anomalies or edge cases.
+
+Prefer a few high-leverage candidates over a long generic risk list.
+
+### 4. Identify the model boundary
+
+For each important uncertainty, classify it:
+
+- **Reasoning-resolvable** — can be clarified from existing facts, logic, or available sources.
+- **Evidence-resolvable** — needs external data, records, primary sources, or expert input.
+- **Reality-resolvable** — requires behavior, experiment, deployment, observation, or interaction with an environment.
+
+This is the stopping rule for pure reasoning. Do not keep generating speculation once the uncertainty has crossed into evidence- or reality-resolvable territory.
+
+### 5. Reframe
+
+Produce two to four alternative formulations that would materially change the plan if true.
+
+At least one must question:
+- the proposed solution,
+- the assumed bottleneck,
+- the success metric,
+- or the system boundary.
+
+Do not choose an alternative frame merely because it sounds clever.
+
+### 6. Design surprise-seeking probes
+
+For the highest-value unresolved uncertainties, design probes that can expose something the current model does not expect.
+
+Each probe should specify:
+- **competing models** — at least two plausible explanations,
+- **action** — the smallest credible contact with reality,
+- **observable outcome** — what will actually be measured or noticed,
+- **surprise condition** — what result would contradict the current model,
+- **decision consequence** — how the next action changes,
+- **cost / reversibility** — why this is an appropriate probe now.
+
+Prefer probes that are:
+- discriminating rather than merely confirmatory,
+- cheap before expensive commitment,
+- observable,
+- reversible,
+- capable of producing an unexpected result.
+
+Examples include:
+- behavioral tests instead of opinion questions,
+- funnel instrumentation before causal optimization,
+- shadow or canary deployment,
+- exposing a prototype to a missing stakeholder,
+- searching for disconfirming cases,
+- testing boundary conditions,
+- sampling failures rather than averages,
+- removing a supposedly essential feature,
+- comparing against a null or simple baseline,
+- inviting an independent expert or adversarial reviewer,
+- running the same task in a different environment or population.
+
+### 7. Define surprise capture
+
+A probe is wasted if anomalies are discarded as noise.
+
+State:
+- which unexpected observations should be logged,
+- who or what should be allowed to contradict the model,
+- what would trigger re-framing instead of local patching.
+
+### 8. End with residual unknowns
+
+Explicitly state what still cannot be known from the current information and planned probes.
+
+The correct ending is not "these are all the blind spots."
+
+The correct ending is closer to:
+> These are the current model boundaries we can see. The next probes are designed to make additional boundaries visible.
 
 ## Output shape
 
-Use these sections when the task is substantial:
+For substantial tasks, use:
 
-- Current frame
-- Hidden assumptions
-- Candidate blind spots
+- Current model
+- Hidden assumptions / frame-lock
+- Candidate out-of-frame variables
 - Alternative frames
-- Decision-changing tests
+- Model boundary: reasoning vs evidence vs reality
+- Surprise-seeking probes
+- Reframe triggers
 - What may still be invisible
 
-Keep the list selective. Five strong blind spots are better than twenty generic risks.
+## Anti-sycophancy and anti-contrarian rules
 
-## Anti-sycophancy rules
+Avoid performative agreement such as "great idea", "excellent point", or "you're absolutely right" when analysis is requested.
 
-Avoid performative agreement such as "great idea", "excellent point", or "you're absolutely right" unless the user explicitly asks for encouragement rather than analysis.
+Do not optimize for making the user feel correct.
 
-Do not optimize for making the user feel correct. Optimize for making the model of reality easier to falsify.
+Also do not optimize for disagreement. Reflexive skepticism is another failure mode.
 
-Do not confuse criticism with discovery. A blind-spot scan may conclude that a concern is already covered.
+A useful scan may conclude:
+- the frame is adequate,
+- the proposed solution remains reasonable,
+- only one small assumption needs testing.
+
+## Failure modes of this skill
+
+Actively guard against:
+
+- **Checklist closure** — believing the listed lenses exhaust the unknown.
+- **Risk theater** — generating many plausible dangers without decision value.
+- **Benchmark overfitting** — repeating familiar blind spots because they scored well before.
+- **Reasoning addiction** — continuing to theorize when only new observations can resolve uncertainty.
+- **Pseudo-probes** — proposing surveys or experiments whose outcomes cannot change the decision.
+- **Confirmation probes** — designing tests that can only support the preferred story.
 
 ## Follow-up depth
 
-When a candidate blind spot becomes central, deepen it with the relevant sibling skill if available:
+Use sibling skills when a boundary becomes specific:
+
 - assumption-audit
 - problem-reframe
 - premortem
 - outside-view
 - evidence-gap
+- probe-design

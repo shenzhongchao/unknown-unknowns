@@ -6,14 +6,15 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)));
 const cases = JSON.parse(fs.readFileSync(path.join(root, 'cases.json'), 'utf8'));
 
 const errors = [];
-if (!Array.isArray(cases) || cases.length < 8) errors.push('cases.json must contain at least 8 cases');
+if (!Array.isArray(cases) || cases.length < 12) errors.push('cases.json must contain at least 12 cases');
 
 const ids = new Set();
 for (const [index, item] of cases.entries()) {
   const p = 'case[' + index + ']';
-  for (const key of ['id', 'category', 'prompt', 'restraint_trap']) {
+  for (const key of ['id', 'category', 'tier', 'prompt', 'restraint_trap']) {
     if (typeof item[key] !== 'string' || !item[key].trim()) errors.push(p + ' missing ' + key);
   }
+  if (!['sanity', 'hard', 'control'].includes(item.tier)) errors.push(item.id + ' has invalid tier');
   if (ids.has(item.id)) errors.push('duplicate id: ' + item.id);
   ids.add(item.id);
   if (!Array.isArray(item.hidden_targets) || item.hidden_targets.length < 2) {

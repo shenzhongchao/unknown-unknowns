@@ -77,6 +77,7 @@ const DIMENSIONS = [
   'falsifiability',
   'calibration',
   'restraint',
+  'probe_quality',
 ];
 
 function validateJudge(result, targetCount) {
@@ -128,6 +129,7 @@ function markdownReport(run) {
     '- Generator: `' + run.generator_model + '`',
     '- Judge: `' + run.judge_model + '`',
     '- Cases: ' + run.results.length,
+    '- Tier: ' + (run.selected_tier ?? 'all'),
     '- Generated: ' + run.generated_at,
     '',
     '## Aggregate',
@@ -162,6 +164,7 @@ async function main() {
   const baseUrl = process.env.OPENAI_BASE_URL ?? 'https://api.openai.com/v1';
   const maxOutput = Number(option(args, '--max-output', '2200'));
   const oneCase = option(args, '--case');
+  const tier = option(args, '--tier');
   const limit = Number(option(args, '--limit', '0'));
 
   const cases = JSON.parse(fs.readFileSync(path.join(evalDir, 'cases.json'), 'utf8'));
@@ -169,7 +172,12 @@ async function main() {
 
   let selected = oneCase ? cases.filter((c) => c.id === oneCase) : cases;
   if (oneCase && selected.length === 0) throw new Error('Unknown case: ' + oneCase);
+  if (tier) {
+    if (!['sanity', 'hard', 'control'].includes(tier)) throw new Error('--tier must be sanity, hard, or control');
+    selected = selected.filter((c) => c.tier === tier);
+  }
   if (limit > 0) selected = selected.slice(0, limit);
+  if (selected.length === 0) throw new Error('No eval cases selected');
 
   const baselineInstructions = [
     'You are a capable helpful assistant.',
@@ -239,7 +247,7 @@ async function main() {
         }
       }),
       '',
-      'Scoring dimensions are integers 0..4: frame_expansion, assumption_quality, decision_relevance, falsifiability, calibration, restraint.',
+      'Scoring dimensions are integers 0..4: frame_expansion, assumption_quality, decision_relevance, falsifiability, calibration, restraint, probe_quality.',
       'Restraint penalty is 0..3, where higher means more overreach or derailment.',
       'Mark a target true only if the answer substantively surfaces it.'
     ].join('\n');
@@ -259,6 +267,7 @@ async function main() {
     results.push({
       id: testCase.id,
       category: testCase.category,
+      tier: testCase.tier,
       prompt: testCase.prompt,
       hidden_targets: testCase.hidden_targets,
       restraint_trap: testCase.restraint_trap,
@@ -285,12 +294,13 @@ async function main() {
   }
 
   const run = {
-    schema_version: 1,
+    schema_version: 2,
     generated_at: new Date().toISOString(),
     generator_model: model,
     judge_model: judgeModel,
     cases_file: 'evals/cases.json',
     skill_file: 'skills/unknown-unknowns/SKILL.md',
+    selected_tier: tier ?? null,
     aggregate: {
       baseline: aggregate(results, 'baseline'),
       treatment: aggregate(results, 'treatment'),
