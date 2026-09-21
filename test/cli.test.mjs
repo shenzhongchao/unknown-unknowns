@@ -21,7 +21,8 @@ test('list exposes bundled skills', () => {
   const result = run(['list']);
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /unknown-unknowns/);
-  assert.match(result.stdout, /assumption-audit/);\n  assert.match(result.stdout, /probe-design/);
+  assert.match(result.stdout, /assumption-audit/);
+  assert.match(result.stdout, /probe-design/);
 });
 
 test('install, overwrite guard, force, and uninstall work for Codex user scope', () => {
