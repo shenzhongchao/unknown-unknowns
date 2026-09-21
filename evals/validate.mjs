@@ -14,7 +14,8 @@ for (const [index, item] of cases.entries()) {
   for (const key of ['id', 'category', 'tier', 'prompt', 'restraint_trap']) {
     if (typeof item[key] !== 'string' || !item[key].trim()) errors.push(p + ' missing ' + key);
   }
-  if (!['sanity', 'hard', 'control'].includes(item.tier)) errors.push(item.id + ' has invalid tier');\n  if (ids.has(item.id)) errors.push('duplicate id: ' + item.id);
+  if (!['sanity', 'hard', 'control'].includes(item.tier)) errors.push(item.id + ' has invalid tier');
+  if (ids.has(item.id)) errors.push('duplicate id: ' + item.id);
   ids.add(item.id);
   if (!Array.isArray(item.hidden_targets) || item.hidden_targets.length < 2) {
     errors.push(item.id + ' must have at least 2 hidden_targets');
