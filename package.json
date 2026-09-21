@@ -1,0 +1,40 @@
+{
+  "name": "unknown-unknowns",
+  "version": "0.1.0",
+  "description": "Agent skills for discovering blind spots, hidden assumptions, and problem-framing errors before execution.",
+  "type": "module",
+  "bin": {
+    "unknown-unknowns": "./bin/unknown-unknowns.js"
+  },
+  "scripts": {
+    "test": "node --test",
+    "list": "node ./bin/unknown-unknowns.js list",
+    "doctor": "node ./bin/unknown-unknowns.js doctor --agent all --scope user"
+  },
+  "files": [
+    "bin",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "agent-skills",
+    "codex",
+    "claude-code",
+    "critical-thinking",
+    "unknown-unknowns",
+    "blind-spots"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shenzhongchao/unknown-unknowns.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shenzhongchao/unknown-unknowns/issues"
+  },
+  "homepage": "https://github.com/shenzhongchao/unknown-unknowns#readme"
+}
