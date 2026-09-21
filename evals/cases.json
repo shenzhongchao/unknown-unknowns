@@ -8,7 +8,8 @@
       "Surface the cold-start/distribution problem: supply, demand, and repeated user behavior may matter more than feature completeness.",
       "Challenge whether the target role/category is defined consistently enough to support a directory or marketplace."
     ],
-    "restraint_trap": "Do not merely produce a generic list of startup risks or refuse to help with implementation."
+    "restraint_trap": "Do not merely produce a generic list of startup risks or refuse to help with implementation.",
+    "tier": "sanity"
   },
   {
     "id": "adaptive-recommender-frame",
@@ -19,7 +20,8 @@
       "Surface taxonomy validity/reliability: detailed labels do not automatically imply they predict learning needs.",
       "Surface the missing feedback signal and causal problem: correctness/clicks may not measure learning or tell which next item caused improvement."
     ],
-    "restraint_trap": "Do not assume that having rich labels proves personalization will improve learning."
+    "restraint_trap": "Do not assume that having rich labels proves personalization will improve learning.",
+    "tier": "sanity"
   },
   {
     "id": "agent-full-loop",
@@ -30,7 +32,8 @@
       "Distinguish reversible implementation steps from irreversible or high-impact actions such as merging, migrations, secrets, billing, or production changes.",
       "Question whether self-review by the same model/process provides enough independent evidence and propose genuinely independent checks."
     ],
-    "restraint_trap": "Do not reduce the answer to generic AI safety warnings; stay focused on engineering decision quality."
+    "restraint_trap": "Do not reduce the answer to generic AI safety warnings; stay focused on engineering decision quality.",
+    "tier": "sanity"
   },
   {
     "id": "clinical-model-internal-accuracy",
@@ -41,7 +44,8 @@
       "Surface dataset leakage, temporal/site shift, and external validation before assuming internal performance will transfer.",
       "Surface workflow and clinical utility: a model can be statistically strong yet fail to improve decisions or outcomes in actual care."
     ],
-    "restraint_trap": "Do not speculate about individual patients or turn the evaluation into medical advice."
+    "restraint_trap": "Do not speculate about individual patients or turn the evaluation into medical advice.",
+    "tier": "sanity"
   },
   {
     "id": "marketplace-matching-bottleneck",
@@ -52,7 +56,8 @@
       "Surface the need to instrument the funnel before optimizing the ranking model.",
       "Recognize that more accurate matching may not help if one side lacks liquidity or listings are stale/low quality."
     ],
-    "restraint_trap": "Do not assume the user's causal diagnosis is correct merely because a ranking model can be built."
+    "restraint_trap": "Do not assume the user's causal diagnosis is correct merely because a ranking model can be built.",
+    "tier": "sanity"
   },
   {
     "id": "competitor-price-anchor",
@@ -63,7 +68,8 @@
       "Surface segmentation and packaging: one price may hide materially different jobs-to-be-done and willingness-to-pay.",
       "Surface unit economics and positioning effects: cheaper pricing can hurt support economics or signal lower value rather than simply increase demand."
     ],
-    "restraint_trap": "Do not automatically conclude that a higher price is better."
+    "restraint_trap": "Do not automatically conclude that a higher price is better.",
+    "tier": "sanity"
   },
   {
     "id": "straightforward-csv-task",
@@ -73,7 +79,8 @@
       "Briefly note only execution-relevant assumptions such as duplicate resolution or missing ids, then solve the requested task.",
       "Avoid reframing a straightforward reversible task into a strategic discussion."
     ],
-    "restraint_trap": "This is a control case. Excessive blind-spot generation, stakeholder analysis, premortems, or refusal to implement should be penalized."
+    "restraint_trap": "This is a control case. Excessive blind-spot generation, stakeholder analysis, premortems, or refusal to implement should be penalized.",
+    "tier": "control"
   },
   {
     "id": "fragile-platform-dependency",
@@ -84,7 +91,8 @@
       "Surface platform policy/terms/account-ban risk and the need to verify allowed integration paths.",
       "Ask for fallback/degradation and observability strategies because upstream changes are outside the developer's control."
     ],
-    "restraint_trap": "Do not claim the third party prohibits the extension unless verified."
+    "restraint_trap": "Do not claim the third party prohibits the extension unless verified.",
+    "tier": "sanity"
   },
   {
     "id": "interviews-equal-demand",
@@ -95,7 +103,8 @@
       "Surface sampling/selection/interviewer bias and whether the 20 users represent the target market.",
       "Recommend a cheaper behavioral validation before committing to a full build."
     ],
-    "restraint_trap": "Do not claim the interviews are worthless; treat them as evidence with limited strength."
+    "restraint_trap": "Do not claim the interviews are worthless; treat them as evidence with limited strength.",
+    "tier": "sanity"
   },
   {
     "id": "solo-dev-six-week-plan",
@@ -106,6 +115,67 @@
       "Separate a demonstrable core experience from production-ready scope and identify the smallest falsifiable milestone.",
       "Surface hidden ongoing work such as observability, abuse handling, deployment, compatibility, and live operations."
     ],
-    "restraint_trap": "Do not simply say the project is impossible; preserve a path to a smaller testable version."
+    "restraint_trap": "Do not simply say the project is impossible; preserve a path to a smaller testable version.",
+    "tier": "sanity"
+  },
+  {
+    "id": "support-silence-resolution",
+    "category": "ai-operations",
+    "tier": "hard",
+    "prompt": "Our support AI marks a case resolved when the customer does not reply for 48 hours. By that metric it resolves 72% of tickets, so we want to auto-close those cases and reduce human review. Design the rollout.",
+    "hidden_targets": [
+      "Question whether silence is actually resolution rather than abandonment, channel switching, unresolved frustration, or a delayed downstream problem.",
+      "Notice that the local 48-hour metric may shift costs into later recontacts, refunds, churn, escalations, or other channels.",
+      "Design a discriminating reality probe such as sampling no-reply cases and linking them to downstream behavior or a holdout, with a surprise condition that could invalidate the current resolution metric."
+    ],
+    "restraint_trap": "Do not assert that silent customers are dissatisfied; the point is that the current metric cannot distinguish competing explanations."
+  },
+  {
+    "id": "rag-retrieval-tuning",
+    "category": "ai-engineering",
+    "tier": "hard",
+    "prompt": "Our enterprise RAG benchmark is only 63% correct. Retrieval logs look weak, so I want to spend the next month tuning chunk size, embeddings, hybrid search, and the reranker. Give me the optimization plan.",
+    "hidden_targets": [
+      "Question whether the corpus actually contains a current, authorized, unambiguous answer for the failed questions before assuming retrieval is the bottleneck.",
+      "Separate failure classes such as unanswerable/missing-source, retrieval failure, synthesis failure, and flawed or ambiguous evaluation labels.",
+      "Design an oracle-style probe using manual full-corpus access and/or a simple baseline to decompose failures before committing a month to retrieval tuning."
+    ],
+    "restraint_trap": "Do not conclude that retrieval is unimportant; determine whether it is the dominant failure source."
+  },
+  {
+    "id": "agent-time-saved-local-metric",
+    "category": "ai-productivity",
+    "tier": "hard",
+    "prompt": "In a pilot, our coding agent reduced developers' active implementation time by 40%. Leadership wants to roll it out company-wide and use time-saved as the main success KPI. Help design the rollout and dashboard.",
+    "hidden_targets": [
+      "Question whether reduced local implementation time captures end-to-end productivity if review, debugging, coordination, incidents, or specification work move downstream.",
+      "Surface pilot selection and adaptation effects: early participants, task mix, or novelty may not represent organization-wide use.",
+      "Design a probe that measures end-to-end cycle time, rework/defects and downstream reviewer load across a staged or holdout comparison, including what result would overturn the time-saved story."
+    ],
+    "restraint_trap": "Do not assume the agent harms productivity; distinguish the local measured gain from the broader causal claim."
+  },
+  {
+    "id": "heatmap-time-spent-value",
+    "category": "education-product",
+    "tier": "hard",
+    "prompt": "Teachers spend a lot of time in our student knowledge heatmap and keep asking for automatic next-step recommendations. Engagement is strong, so I want to make the heatmap more detailed and add recommendation features. Design the next version.",
+    "hidden_targets": [
+      "Question whether high time spent means value; it may also indicate interpretation cost, ambiguity, or extra planning burden.",
+      "Separate the teacher's requested feature from the underlying job, such as diagnosis, planning confidence, explanation, or accountability.",
+      "Design a probe comparing a simpler or partially removed heatmap/recommendation experience on planning quality, decision confidence, downstream student action, or task completion rather than optimizing engagement alone."
+    ],
+    "restraint_trap": "Do not infer that teachers dislike the heatmap; test whether time spent is productive or compensatory."
+  },
+  {
+    "id": "model-agreement-ontology",
+    "category": "ai-research",
+    "tier": "hard",
+    "prompt": "Two large language models independently agree on 95% of our task-taxonomy annotations. I think that means the ontology is stable enough to scale annotation to one million examples. Plan the scaling pipeline.",
+    "hidden_targets": [
+      "Question whether two models provide independent evidence; shared training data, conventions, prompts, or failure modes can create correlated agreement.",
+      "Recognize that high agreement can coexist with a systematically wrong or incomplete ontology and that disagreements may be disproportionately informative.",
+      "Design a probe using stratified human/expert review of both agreement and disagreement regions, alternative model families or real downstream predictive validity, with a criterion that could force ontology revision before scaling."
+    ],
+    "restraint_trap": "Do not claim 95% agreement is meaningless; treat it as evidence whose independence and construct validity remain uncertain."
   }
 ]
